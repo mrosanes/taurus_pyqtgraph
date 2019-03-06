@@ -276,10 +276,12 @@ class TaurusCurveItemTableModel(Qt.QAbstractTableModel):
                 column = parent.columnCount()
         if data.hasFormat(TAURUS_ATTR_MIME_TYPE):
             self.setData(self.index(row, column),
-                         value=str(data.data(TAURUS_ATTR_MIME_TYPE)))
+                         value=str(data.data(TAURUS_ATTR_MIME_TYPE),
+                                   encoding='utf-8'))
             return True
         elif data.hasFormat(TAURUS_MODEL_LIST_MIME_TYPE):
-            models = str(data.data(TAURUS_MODEL_LIST_MIME_TYPE)).split()
+            models = str(data.data(TAURUS_MODEL_LIST_MIME_TYPE),
+                         encoding='utf-8').split()
             if len(models) == 1:
                 self.setData(self.index(row, column),
                              value=models[0])
